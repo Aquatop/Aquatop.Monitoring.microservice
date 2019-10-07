@@ -33,9 +33,9 @@ class MonitoringController {
       aquarium.waterLevel = req.body.waterLevel;
       aquarium.temperature = req.body.temperature;
 
-      aquarium.save();
+      const updatedAquarium = await aquarium.save();
 
-      return { aquarium, result: 'Aquarium updated!' };
+      return { updatedAquarium, result: 'Aquarium updated!' };
     }
 
     return { result: 'Aquarium not found!' };
@@ -52,9 +52,19 @@ class MonitoringController {
       messages: [{ value: JSON.stringify(message) }],
     });
 
+    const sleep = ms => {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    };
+
+    await sleep(3000);
+
     const aquarium = await Aquarium.findOne({ name });
 
-    return res.json(aquarium);
+    if (aquarium) {
+      return res.json(aquarium);
+    }
+
+    return res.json({ ok: false });
   }
 }
 
