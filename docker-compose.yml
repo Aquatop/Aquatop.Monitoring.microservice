@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  user-microservice:
+  monitoring-microservice:
     container_name: monitoring-microservice
     build: .
     command: bash -c "yarn && yarn dev"
