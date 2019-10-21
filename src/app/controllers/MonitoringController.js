@@ -44,6 +44,12 @@ class MonitoringController {
   async index(req, res) {
     const { name } = req.params;
 
+    const checkAquarium = await Aquarium.findOne({ name });
+
+    if (!checkAquarium) {
+      return res.json({ error: 'Aquarium not found!' });
+    }
+
     const message = { type: 'REQUEST_REPORT', aquarium: name };
 
     await req.producer.send({
@@ -60,11 +66,7 @@ class MonitoringController {
 
     const aquarium = await Aquarium.findOne({ name });
 
-    if (aquarium) {
-      return res.json(aquarium);
-    }
-
-    return res.json({ ok: false });
+    return res.json(aquarium);
   }
 }
 
