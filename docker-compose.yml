@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  monitoring-microservice:
+    container_name: monitoring-microservice
+    build: .
+    command: bash -c "yarn && yarn dev"
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/usr/app
+    network_mode: host
