@@ -6,7 +6,7 @@ class Communication {
   constructor() {
     this.kafka = new Kafka({
       clientId: 'monitoring',
-      brokers: ['localhost:9092'],
+      brokers: [process.env.KAFKA_URL],
       logLevel: logLevel.WARN,
     });
 
