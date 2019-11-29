@@ -62,7 +62,7 @@ class MonitoringController {
       return new Promise(resolve => setTimeout(resolve, ms));
     };
 
-    await sleep(3000);
+    await sleep(11000);
 
     const aquarium = await Aquarium.findOne({ name });
 
